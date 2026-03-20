@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-slot-manager"
+version = "0.1.0"
+description = "Priority-aware distributed semaphore for LLM inference endpoints"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{name = "Teal Maker Consulting"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = ["redis>=5.0.0"]
+
+[project.optional-dependencies]
+metrics = ["prometheus-client>=0.19.0"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "fakeredis>=2.20.0"]
+
+[project.urls]
+Homepage = "https://github.com/Teal-Maker/llm-slot-manager"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_slot_manager"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
